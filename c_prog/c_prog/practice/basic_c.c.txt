@@ -1,0 +1,263 @@
+# C Programming Language - Quick Reference Guide
+
+## **What is C Language?**
+C is a general-purpose, procedural programming language developed by Dennis Ritchie in 1972 at Bell Labs. It's widely used for system programming, embedded systems, and application development.
+
+**Example:**
+```c
+#include <stdio.h>
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
+
+---
+
+## **Key Features of C**
+- **Simple & Efficient**: Easy to learn with minimal keywords
+- **Portable**: Code runs on different platforms with minimal changes
+- **Mid-level language**: Combines low-level (hardware) and high-level features
+- **Structured**: Supports functions and modular programming
+- **Rich library**: Built-in functions for various operations
+- **Pointer support**: Direct memory manipulation
+
+---
+
+## **Compiler vs Interpreter**
+
+| **Compiler** | **Interpreter** |
+|-------------|----------------|
+| Translates entire program at once | Translates line by line |
+| Faster execution | Slower execution |
+| Creates executable file | No executable file |
+| Example: C, C++ | Example: Python, JavaScript |
+
+**C uses a compiler** (like GCC) to convert source code into machine code.
+
+---
+
+## **Use of `#include`**
+Includes header files containing function declarations and macros into your program.
+
+**Example:**
+```c
+#include <stdio.h>  // For printf(), scanf()
+#include <math.h>   // For sqrt(), pow()
+```
+
+---
+
+## **`#include <filename>` vs `#include "filename"`**
+
+| **`<filename>`** | **`"filename"`** |
+|-----------------|-----------------|
+| Searches in system directories | Searches in current directory first, then system |
+| For standard library headers | For user-defined headers |
+
+**Example:**
+```c
+#include <stdio.h>      // Standard library
+#include "myheader.h"   // Your custom header
+```
+
+---
+
+## **Declaration vs Definition**
+
+**Declaration**: Tells the compiler about variable type and name (no memory allocated)
+```c
+extern int x;  // Declaration only
+```
+
+**Definition**: Allocates memory and may assign value
+```c
+int x = 10;    // Definition (declaration + memory allocation)
+```
+
+---
+
+## **Keywords in C**
+Reserved words with special meaning (32 in ANSI C).
+
+**Examples**: `int`, `float`, `if`, `else`, `while`, `for`, `return`, `break`, `continue`, `void`, `struct`, `char`
+
+```c
+int age = 25;        // 'int' is a keyword
+if (age > 18) { }    // 'if' is a keyword
+```
+
+---
+
+## **`printf()` vs `scanf()`**
+
+| **`printf()`** | **`scanf()`** |
+|---------------|--------------|
+| Output function | Input function |
+| Displays data to screen | Reads data from keyboard |
+
+**Example:**
+```c
+int num;
+printf("Enter a number: ");  // Output
+scanf("%d", &num);           // Input (note the & for address)
+printf("You entered: %d", num);
+```
+
+---
+
+## **Purpose of `main()` Function**
+The entry point of every C program. Execution starts from `main()`.
+
+**Example:**
+```c
+int main() {
+    // Program starts here
+    printf("Program begins");
+    return 0;  // Returns status to OS (0 = success)
+}
+```
+
+---
+
+## **`getchar()`, `putchar()`, `gets()`, `puts()`**
+
+| Function | Purpose | Example |
+|----------|---------|---------|
+| `getchar()` | Reads single character | `char c = getchar();` |
+| `putchar()` | Prints single character | `putchar('A');` |
+| `gets()` | Reads string (**unsafe, deprecated**) | `gets(str);` |
+| `puts()` | Prints string with newline | `puts("Hello");` |
+
+**Example:**
+```c
+char ch = getchar();    // Input: A
+putchar(ch);            // Output: A
+
+char name[50];
+puts("Enter name:");    // Output with newline
+fgets(name, 50, stdin); // Use fgets() instead of gets()
+puts(name);
+```
+
+---
+
+## **Global vs Local Variables**
+
+| **Global** | **Local** |
+|-----------|----------|
+| Declared outside functions | Declared inside functions |
+| Accessible throughout program | Accessible only within that function |
+| Exists for entire program | Exists only during function execution |
+
+**Example:**
+```c
+int global = 100;  // Global variable
+
+void func() {
+    int local = 50;  // Local variable
+    printf("%d %d", global, local);  // Both accessible here
+}
+
+int main() {
+    printf("%d", global);   // OK
+    // printf("%d", local); // ERROR: local not accessible
+    return 0;
+}
+```
+
+---
+
+## **`=` vs `==`**
+
+| **`=`** | **`==`** |
+|--------|---------|
+| Assignment operator | Comparison operator |
+| Assigns value | Checks equality |
+| Returns assigned value | Returns 1 (true) or 0 (false) |
+
+**Example:**
+```c
+int x = 5;        // Assignment: x gets value 5
+if (x == 5) {     // Comparison: checks if x equals 5
+    printf("Equal");
+}
+```
+
+---
+
+## **Type Casting in C**
+Converting one data type to another.
+
+**Implicit** (automatic):
+```c
+int x = 10;
+float y = x;  // int automatically converted to float
+```
+
+**Explicit** (manual):
+```c
+float a = 9.7;
+int b = (int)a;  // b = 9 (decimal part removed)
+
+int num1 = 5, num2 = 2;
+float result = (float)num1 / num2;  // result = 2.5
+```
+
+---
+
+## **Constant in C**
+A value that cannot be changed during program execution.
+
+**Using `#define`:**
+```c
+#define PI 3.14159
+```
+
+**Using `const` keyword:**
+```c
+const int MAX = 100;
+// MAX = 200;  // ERROR: cannot modify
+```
+
+**Example:**
+```c
+const float TAX_RATE = 0.18;
+float price = 1000;
+float total = price + (price * TAX_RATE);
+```
+
+---
+
+## **`break`, `continue`, and `goto`**
+
+### **`break`**: Exits loop or switch immediately
+```c
+for (int i = 0; i < 10; i++) {
+    if (i == 5) break;  // Loop stops at i=5
+    printf("%d ", i);   // Output: 0 1 2 3 4
+}
+```
+
+### **`continue`**: Skips current iteration, continues with next
+```c
+for (int i = 0; i < 5; i++) {
+    if (i == 2) continue;  // Skip when i=2
+    printf("%d ", i);      // Output: 0 1 3 4
+}
+```
+
+### **`goto`**: Jumps to labeled statement (generally avoided)
+```c
+int i = 0;
+start:
+    printf("%d ", i);
+    i++;
+    if (i < 5) goto start;  // Output: 0 1 2 3 4
+```
+
+**Note**: `goto` makes code harder to read and maintain; use loops instead.
+
+---
+
+This covers the fundamentals! Practice these concepts to build a strong C programming foundation.

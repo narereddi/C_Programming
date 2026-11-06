@@ -1,0 +1,21 @@
+#!/bin/bash
+# Script to compile and run 10 C programs sequentially
+
+for i in {1..10}
+do
+    echo "--------------------------------"
+    echo "Compiling prog$i.c ..."
+    gcc p$i.c -o p$i
+
+    if [ $? -eq 0 ]; then
+        echo "Running prog$i:"
+        ./p$i
+        echo "Completed prog$i"
+    else
+        echo "Compilation failed for prog$i.c"
+        exit 1
+    fi
+done
+
+echo "--------------------------------"
+echo "All programs executed successfully!"
